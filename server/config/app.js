@@ -5,6 +5,8 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
+require('dotenv').config()
+
 // import "mongoose" - required for DB Access
 let mongoose = require('mongoose');
 // URI
