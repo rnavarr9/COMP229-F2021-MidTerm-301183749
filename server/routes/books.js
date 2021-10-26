@@ -57,7 +57,7 @@ router.get('/:id', (req, res, next) => {
     let _id = req.params.id
     let book = books.books.find(b => b._id === _id )
     console.log({book})
-    res.render("books/details", {title: "Update Book", books: book})
+    res.render("books/details", {title: "Update Book Details", books: book})
 
 });
 
