@@ -53,6 +53,12 @@ router.get('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
+    // console.log(books.books)
+    let _id = req.params.id
+    let book = books.books.find(b => b._id === _id )
+    console.log({book})
+    res.render("books/details", {title: "Update Book", books: book})
+
 });
 
 // POST - process the information passed from the details form and update the document
