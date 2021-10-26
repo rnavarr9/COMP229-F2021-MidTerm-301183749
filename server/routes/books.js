@@ -34,7 +34,7 @@ console.log({req,res})
     /*****************
      * ADD CODE HERE *
      *****************/
-    res.render('books/details', {title: "", books: []})
+    res.render('books/details', {title: "", books: {}})
 
 });
 
@@ -76,6 +76,11 @@ router.get('/delete/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
+    console.log(`User ${req.params.id} deleted`)
+    res.render('books/index', {
+      title: 'Books',
+      books: books.books
+    });
 });
 
 
