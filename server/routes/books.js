@@ -59,11 +59,15 @@ router.get('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-    // console.log(books.books)
-    // let _id = req.params.id
-    // let book = books.books.find(b => b._id === _id )
-    // res.render("books/details", {title: "Update Book Details", books: book})
-
+    let id = req.params.id;
+    book.findById(id, (err, bookToEdit) => {
+      if (err) {
+        console.log("Error while retrieving book to update", err)
+      } else {
+        console.log("Book retrieved from database", bookToEdit)
+        res.render("books/details", { title: "Update Book Details", books: bookToEdit });
+      }
+    })
 });
 
 // POST - process the information passed from the details form and update the document
@@ -72,7 +76,27 @@ router.post('/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
+     let id = req.params.id;
+     let b = req.body;
 
+     let updatedBook = book({
+      _id: id,
+      Title: b.title,
+      Price: b.price,
+      Author: b.author,
+      Genre: b.genre
+    });
+    
+    book.update({ _id: id }, {$set: updatedBook}, (err) => {
+      if (err) {
+        console.log("Error while updating book", err);
+        res.end(err);
+      } else {
+        // refresh the book list
+        console.log("Book Updated!!!")
+        res.redirect("/books");
+      }
+    });
 });
 
 // GET - process the delete by book id
