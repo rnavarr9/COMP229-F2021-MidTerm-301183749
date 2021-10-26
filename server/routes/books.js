@@ -105,10 +105,14 @@ router.get('/delete/:id', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-    console.log(`Book ${req.params.id} deleted`)
-    res.render('books/index', {
-      title: 'Books',
-      books: books.books
+     let id = req.params.id;
+     book.remove({ _id: id }, (err) => {
+      if (err) {
+        console.log("Error while deleting book", err);
+        res.end(err);
+      } else {
+        res.redirect("/books");
+      }
     });
 });
 
