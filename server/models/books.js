@@ -1,3 +1,9 @@
+/**
+ * File name      : book.js
+ * Student’s Name : Renzo Navarro
+ * StudentID      : 301183749
+ * Wev App Name   : comp229-f2021-midterm
+ */
 let mongoose = require('mongoose');
 
 // create a model class
