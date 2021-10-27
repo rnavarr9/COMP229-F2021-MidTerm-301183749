@@ -1,3 +1,9 @@
+/**
+ * File name      : books.js
+ * Student’s Name : Renzo Navarro
+ * StudentID      : 301183749
+ * Wev App Name   : comp229-f2021-midterm
+ */
 // modules required for routing
 const { render } = require('ejs');
 let express = require('express');
@@ -40,8 +46,9 @@ router.post('/add', (req, res, next) => {
     /*****************
      * ADD CODE HERE *
      *****************/
-    let b = req.body;
-    let newBook = book({Title: b.title, Price: b.price, Author: b.author, Genre: b.genre})
+    let reqBook = req.body;
+    let newBook = book({Title: reqBook.title, Price: reqBook.price, Author: reqBook.author, Genre: reqBook.genre})
+    // creates book in db
     book.create(newBook, (err, book) => {
       if (err) {
         console.log("Error while creating the book", err);
@@ -60,6 +67,7 @@ router.get('/:id', (req, res, next) => {
      * ADD CODE HERE *
      *****************/
     let id = req.params.id;
+    // find book by id in db
     book.findById(id, (err, bookToEdit) => {
       if (err) {
         console.log("Error while retrieving book to update", err)
@@ -77,17 +85,18 @@ router.post('/:id', (req, res, next) => {
      * ADD CODE HERE *
      *****************/
      let id = req.params.id;
-     let b = req.body;
+     let reqBook = req.body;
 
      let updatedBook = book({
       _id: id,
-      Title: b.title,
-      Price: b.price,
-      Author: b.author,
-      Genre: b.genre
+      Title: reqBook.title,
+      Price: reqBook.price,
+      Author: reqBook.author,
+      Genre: reqBook.genre
     });
+    
     // update method is deprecated, then for security I used the one suggested by mongoose: updateOne
-    book.updateOne({ _id: id }, updatedBook, (err) => {
+    book.update({ _id: id }, {$set: updatedBook}, (err) => {
       if (err) {
         console.log("Error while updating book", err);
         res.end(err);
@@ -106,6 +115,8 @@ router.get('/delete/:id', (req, res, next) => {
      * ADD CODE HERE *
      *****************/
      let id = req.params.id;
+
+     // remove book from db
      book.remove({ _id: id }, (err) => {
       if (err) {
         console.log("Error while deleting book", err);
