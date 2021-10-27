@@ -86,8 +86,8 @@ router.post('/:id', (req, res, next) => {
       Author: b.author,
       Genre: b.genre
     });
-    
-    book.update({ _id: id }, {$set: updatedBook}, (err) => {
+    // update method is deprecated, then for security I used the one suggested by mongoose: updateOne
+    book.updateOne({ _id: id }, updatedBook, (err) => {
       if (err) {
         console.log("Error while updating book", err);
         res.end(err);
