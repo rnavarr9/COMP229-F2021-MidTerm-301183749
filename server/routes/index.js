@@ -1,3 +1,9 @@
+/**
+ * File name      : index.js
+ * Student’s Name : Renzo Navarro
+ * StudentID      : 301183749
+ * Wev App Name   : comp229-f2021-midterm
+ */
 // modules required for routing
 let express = require('express');
 let router = express.Router();
